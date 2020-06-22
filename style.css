@@ -83,3 +83,19 @@ header {
 #answers li {
     margin: 0.125em 0;
 }
+
+/* Feedback */
+
+#feedback {
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-weight: 500;
+    color: #888888;
+
+    margin: 1em 0;
+    padding-top: 1em;
+
+    border-top-width: 0.125em;
+    border-style: solid;
+    border-color: #bbbbbb;
+}
