@@ -17,9 +17,9 @@
 <body>
 
     <!-- Header - always visible except when viewing high scores -->
-    <header>
+    <header class="invisible">
         <!-- View high scores -->
-        <span id="view-high-scores">View High Scores</span>
+        <span id="high-scores-link">View High Scores</span>
         <!-- Time left -->
         <span id="time">Time: <span>0</span></span>
     </header>
@@ -54,7 +54,7 @@
         <div id="feedback" class="display-none">Correct!</div>
 
         <!-- End Screen -->
-        <div id="end-screen">
+        <div id="end-screen" class="display-none">
             <!-- Heading -->
             <h2>All done!</h2>
             <!-- Final score -->
@@ -71,10 +71,18 @@
         </div>
 
         <!-- High Scores View -->
+        <div id="high-scores-view">
             <!-- Heading -->
+            <h2>High Scores</h2>
             <!-- List of high scores -->
+            <ol>
+                <li>AB - 22</li>
+            </ol>
             <!-- Go back button -->
+            <button id="go-back-button">Go Back</button>
             <!-- Clear high scores button -->
+            <button id="clear-high-scores">Clear High Scores</button>
+        </div>
 
     </main>
 
