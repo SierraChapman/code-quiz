@@ -29,7 +29,7 @@ h1, p {
     margin: 1rem 0;
 }
 
-button {
+button, #submit-button {
     font: inherit;
     color: #ffffff;
 
@@ -46,7 +46,7 @@ button {
     border-radius: 0.375em;
 }
 
-button:hover {
+button:hover, #submit-button:hover {
     background-color: #663b7e;
     border-top-color: #886699;
     border-right-color: #552f66;
@@ -81,7 +81,7 @@ header {
 
 /* Question View */
 
-#question {
+#question, h2 {
     font-size: 1.3em;
     font-weight: 700;
 }
@@ -104,4 +104,18 @@ header {
     border-top-width: 0.125em;
     border-style: solid;
     border-color: #bbbbbb;
+}
+
+/* End Screen */
+
+#initials-input {
+    font: inherit;
+
+    margin: 0;
+    padding: 0 0.125em;
+
+    border-style: solid;
+    border-width: 0.0625em;
+    border-color: #888888;
+    border-radius: 0.375em;
 }

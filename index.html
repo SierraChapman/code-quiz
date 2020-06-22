@@ -38,7 +38,7 @@
         </div>
 
         <!-- Question View -->
-        <div id="question-view">
+        <div id="question-view" class="display-none">
             <!-- Question -->
             <p id="question">The condition in an if / else statement is enclosed within ____.<p>
             <!-- Buttons for multiple choice options -->
@@ -51,15 +51,24 @@
         </div>
 
         <!-- Feedback - visible for about a second after answer is submitted -->
-        <div id="feedback">Correct!</div>
+        <div id="feedback" class="display-none">Correct!</div>
 
         <!-- End Screen -->
+        <div id="end-screen">
             <!-- Heading -->
+            <h2>All done!</h2>
             <!-- Final score -->
+            <p>Your final score is <span id="final score">22</span>.</p>
             <!-- Form to enter initials if reached scoreboard -->
+            <form>
                 <!-- Text instructions -->
+                <label for="initials-input">Enter initials:</label>
                 <!-- Input field -->
+                <input type="text" id="initials-input" name="initials-input">
                 <!-- Submit button -->
+                <input type="submit" id="submit-button" value="Submit">
+            </form>
+        </div>
 
         <!-- High Scores View -->
             <!-- Heading -->
