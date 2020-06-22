@@ -37,15 +37,21 @@ button {
     padding: 0.125em;
     background-color: #58246f;
 
-    border-style: outset;
+    border-style: solid;
     border-width: 0.125em;
-    border-color: #80429b;
+    border-top-color: #77558d;
+    border-right-color: #441e55;
+    border-bottom-color: #3f114f;
+    border-left-color: #663b7e;
     border-radius: 0.375em;
 }
 
 button:hover {
-    background-color: #6f3388;
-    border-color: #9051ac;
+    background-color: #663b7e;
+    border-top-color: #886699;
+    border-right-color: #552f66;
+    border-bottom-color: #4b2255;
+    border-left-color: #774f8b;
     cursor: pointer;
 }
 
