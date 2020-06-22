@@ -2,20 +2,63 @@
 
 body {
     font-size: 16px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Nunito', sans-serif;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2em;
+    line-height: 1.25;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h1, p {
+    margin: 1rem 0;
+}
+
+button {
+    font: inherit;
+    color: #ffffff;
+
+    margin: 0;
+    padding: 2px;
+    background-color: #58246f;
+
+    border-style: outset;
+    border-width: 2px;
+    border-color: #80429b;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: #6f3388;
+    border-color: #8a4aa5;
+    cursor: pointer;
 }
 
 /* Header */
 
 header {
     padding: 8px;
-    font-family: 'Nunito', sans-serif;
 }
 
 #view-high-scores {
     color: #58246f;
 }
 
+#view-high-scores:hover {
+    cursor: pointer;
+}
+
 #time {
     float: right;
+}
+
+/* Start Screen */
+
+#start-screen {
+    text-align: center;
 }
