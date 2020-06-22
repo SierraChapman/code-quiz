@@ -6,9 +6,13 @@ body {
 }
 
 main {
-    margin: 0.5em auto;
+    margin: 1.5em auto;
     max-width: 35em;
-    padding: 0 0.5em;
+    padding: 0 1.5em;
+}
+
+.display-none {
+    display: none;
 }
 
 h1 {
@@ -30,18 +34,18 @@ button {
     color: #ffffff;
 
     margin: 0;
-    padding: 2px;
+    padding: 0.125em;
     background-color: #58246f;
 
     border-style: outset;
-    border-width: 2px;
+    border-width: 0.125em;
     border-color: #80429b;
-    border-radius: 6px;
+    border-radius: 0.375em;
 }
 
 button:hover {
     background-color: #6f3388;
-    border-color: #8a4aa5;
+    border-color: #9051ac;
     cursor: pointer;
 }
 
@@ -67,4 +71,15 @@ header {
 
 #start-screen {
     text-align: center;
+}
+
+/* Question View */
+
+#question {
+    font-size: 1.3em;
+    font-weight: 700;
+}
+
+#answers li {
+    margin: 0.125em 0;
 }
