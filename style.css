@@ -5,6 +5,12 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+main {
+    margin: 0.5em auto;
+    max-width: 35em;
+    padding: 0 0.5em;
+}
+
 h1 {
     font-weight: 700;
     font-size: 2em;
@@ -42,7 +48,7 @@ button:hover {
 /* Header */
 
 header {
-    padding: 8px;
+    padding: 0.5em;
 }
 
 #view-high-scores {
