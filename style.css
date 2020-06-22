@@ -1,0 +1,21 @@
+/* Whole document */
+
+body {
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+
+header {
+    padding: 8px;
+    font-family: 'Nunito', sans-serif;
+}
+
+#view-high-scores {
+    color: #58246f;
+}
+
+#time {
+    float: right;
+}
