@@ -1,11 +1,49 @@
 // CREATE GLOBAL VARIABLES
 
 // pointers to DOM elements
+var highScoresLink = document.getElementById("high-scores-link");
+var timeDisplay = document.getElementById("time");
+var startView = document.getElementById("start-screen");
+var startButton = document.getElementById("start-button");
+var questionView = document.getElementById("question-view");
+var questionDisplay = document.getElementById("question");
+var answersDisplay = document.getElementById("answers");
 // pointer to current view
+var currentView = startView;
 // quiz questions
+var questionsArray = [
+    {
+        question: "Commonly used data types DO NOT include:",
+        answers: ["strings", "booleans", "alerts", "numbers"],
+        correct: 1
+    },
+    {
+        question: "The condition in an if / else statement is enclosed within _____.",
+        answers: ["quotes", "curly brackets", "parentheses", "square brackets"],
+        correct: 2
+    },
+    {
+        question: "Arrays in JavaScript can be used to store _____.",
+        answers: ["numbers and strings", "other arrays", "booleans", "all of the above"],
+        correct: 3
+    },
+    {
+        question: "String values must be enclosed within _____ when being assigned to variables.",
+        answers: ["commas", "curly brackets", "quotes", "parentheses"],
+        correct: 2
+    },
+    {
+        question: "A very useful tool used during development and debugging for printing content to the debugger is:",
+        answers: ["JavaScript", "terminal / bash", "for loops", "console.log"],
+        correct: 3
+    },
+];
 // current question index
+var currentQuestion;
 // time left
+var timeLeft;
 // pointer to the interval
+var interval;
 // high scores object - retrieve from localStorage
 
 // if high scores object is null, set to empty list
@@ -13,31 +51,54 @@
 // DEFINE FUNCTIONS
 
 // Change view - for all but high scores!
+function changeView(newView) {
     // Hide current view
+    currentView.className = "display-none";
     // Change current view pointer
+    currentView = newView;
     // Display new view
+    newView.className = "";
+}
 
 // Start the quiz
+function startQuiz() {
     // Set time left
+    timeLeft = 75;
     // Set current question index
+    currentQuestion = 0;
     // Update question
+    updateQuestion();
     // Change to question view
+    changeView(questionView);
     // Start the countdown interval
+    interval = setInterval(countOneSec, 1000);
+}
 
 // Count down
+function countOneSec() {
     // Decrease time left by one
     // Update new time
     // If time left is zero:
         // Stop the interval
         // Show end screen
+}
 
 // Update question
+function updateQuestion() {
     // Set question text to current question
+    questionDisplay.textContent = questionsArray[currentQuestion].question;
     // Clear the answer list
+    answersDisplay.innerHTML = "";
     // For each answer:
-        // Create li answer as button
-        // Save index for that answer
+    for (var i = 0; i < questionsArray[currentQuestion].answers.length; i++) {
+        // Create li answer
+        var answerElement = document.createElement("li");
+        // Set inner HTML, including text, button tag, and index for that answer
+        answerElement.innerHTML = '<button id="' + i + '" >' + (i + 1) + '. ' + questionsArray[currentQuestion].answers[i] + '</button>';
         // Add li to the answers ol
+        answersDisplay.appendChild(answerElement);
+    }
+}
 
 // Check user's answer
     // Determine which answer was clicked
@@ -110,6 +171,7 @@
 // CREATE EVENT LISTENERS
 
 // When start button is clicked, start the quiz
+startButton.addEventListener("click", startQuiz);
 
 // When answer is chosen, check user's answer
 
