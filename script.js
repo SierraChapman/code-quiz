@@ -45,8 +45,10 @@ var questionsArray = [
 var currentQuestion;
 // time left
 var timeLeft;
-// pointer to the interval
-var interval;
+// pointer to the interval responsible for the timer
+var timerInterval;
+// pointer to timeout for displaying feedback
+var feedbackTimeout;
 // high scores object - retrieve from localStorage
 
 // if high scores object is null, set to empty list
@@ -75,7 +77,7 @@ function startQuiz() {
     changeView(questionView);
     // Start the countdown interval
     timeDisplay.firstElementChild.textContent = timeLeft;
-    interval = setInterval(countOneSec, 1000);
+    timerInterval = setInterval(countOneSec, 1000);
 }
 
 // Count down
@@ -147,12 +149,14 @@ function checkAnswer(event) {
 
 // Give feedback
 function showFeedback(feedbackMessage) {
+    // Stop any active timouts for feedback
+    clearTimeout(feedbackTimeout);
     // Set feedback text to message
     feedbackDisplay.textContent = feedbackMessage;
     // Display feedback
     feedbackDisplay.className = "";
     // Hide feedback and reset text after 1.5 seconds
-    setTimeout(function() {
+    feedbackTimeout = setTimeout(function() {
         feedbackDisplay.className="display-none";
     }, 1500)
 }
@@ -177,7 +181,7 @@ function processWrongAnswer() {
 // End the game and show end screen
 function endGame() {
     // Stop the interval
-    clearInterval(interval);
+    clearInterval(timerInterval);
     // Make sure time left is not negative
     if (timeLeft < 0) {
         timeLeft = 0;
