@@ -17,7 +17,7 @@
 <body>
 
     <!-- Header - always visible except when viewing high scores -->
-    <header class="invisible">
+    <header>
         <!-- View high scores -->
         <span id="high-scores-link">View High Scores</span>
         <!-- Time left -->
@@ -28,7 +28,7 @@
     <main>
 
         <!-- Start Screen -->
-        <div id="start-screen" class="display-none">
+        <div id="start-screen">
             <!-- Heading -->
             <h1>Coding Quiz Challenge</h1>
             <!-- Instructions -->
@@ -40,25 +40,21 @@
         <!-- Question View -->
         <div id="question-view" class="display-none">
             <!-- Question -->
-            <p id="question">The condition in an if / else statement is enclosed within ____.<p>
+            <p id="question"><p>
             <!-- Buttons for multiple choice options -->
             <ol id="answers">
-                <li><button>1. quotes</button></li>
-                <li><button>2. curly brackets</button></li>
-                <li><button>3. parentheses</button></li>
-                <li><button>4. square brackets</button></li>
             </ol>
         </div>
 
         <!-- Feedback - visible for about a second after answer is submitted -->
-        <div id="feedback" class="display-none">Correct!</div>
+        <div id="feedback" class="display-none"></div>
 
         <!-- End Screen -->
         <div id="end-screen" class="display-none">
             <!-- Heading -->
             <h2>All done!</h2>
             <!-- Final score -->
-            <p>Your final score is <span id="final score">22</span>.</p>
+            <p>Your final score is <span id="final score"></span>.</p>
             <!-- Form to enter initials if reached scoreboard -->
             <form>
                 <!-- Text instructions -->
@@ -71,13 +67,11 @@
         </div>
 
         <!-- High Scores View -->
-        <div id="high-scores-view">
+        <div id="high-scores-view" class="display-none">
             <!-- Heading -->
             <h2>High Scores</h2>
             <!-- List of high scores -->
-            <ol>
-                <li>AB - 22</li>
-            </ol>
+            <ol id="high-scores-list"></ol>
             <!-- Go back button -->
             <button id="go-back-button">Go Back</button>
             <!-- Clear high scores button -->
