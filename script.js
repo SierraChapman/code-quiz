@@ -8,6 +8,7 @@ var startButton = document.getElementById("start-button");
 var questionView = document.getElementById("question-view");
 var questionDisplay = document.getElementById("question");
 var answersDisplay = document.getElementById("answers");
+var feedbackDisplay = document.getElementById("feedback");
 // pointer to current view
 var currentView = startView;
 // quiz questions
@@ -15,27 +16,27 @@ var questionsArray = [
     {
         question: "Commonly used data types DO NOT include:",
         answers: ["strings", "booleans", "alerts", "numbers"],
-        correct: 1
+        correct: "2"
     },
     {
         question: "The condition in an if / else statement is enclosed within _____.",
         answers: ["quotes", "curly brackets", "parentheses", "square brackets"],
-        correct: 2
+        correct: "2"
     },
     {
         question: "Arrays in JavaScript can be used to store _____.",
         answers: ["numbers and strings", "other arrays", "booleans", "all of the above"],
-        correct: 3
+        correct: "3"
     },
     {
         question: "String values must be enclosed within _____ when being assigned to variables.",
         answers: ["commas", "curly brackets", "quotes", "parentheses"],
-        correct: 2
+        correct: "2"
     },
     {
         question: "A very useful tool used during development and debugging for printing content to the debugger is:",
         answers: ["JavaScript", "terminal / bash", "for loops", "console.log"],
-        correct: 3
+        correct: "3"
     },
 ];
 // current question index
@@ -102,37 +103,83 @@ function updateQuestion() {
         // Create li answer
         var answerElement = document.createElement("li");
         // Set inner HTML, including text, button tag, and index for that answer
-        answerElement.innerHTML = '<button id="' + i + '" >' + (i + 1) + '. ' + questionsArray[currentQuestion].answers[i] + '</button>';
+        answerElement.innerHTML = '<button value="' + i + '">' + (i + 1) + '. ' + questionsArray[currentQuestion].answers[i] + '</button>';
         // Add li to the answers ol
         answersDisplay.appendChild(answerElement);
     }
 }
 
-// Check user's answer
-    // Determine which answer was clicked
+// Proceed to next question
+function goToNextQuestion() {
+    // Increment currentQuestion by one
+    currentQuestion++;
+    // If currentQuestion is greater than or equal to the number of questions:
+    if (currentQuestion >= questionsArray.length) {
+        // Proceed to end screen
+        endGame();
+    } else {
+        // Update question
+        updateQuestion();
+    }
+}
 
-    // If user answer matches answer key:
-        // Give feedback saying "Correct!"
-        // Show next question
-    // Otherwise:
-        // Give feedback saying "Wrong!"
-        // Process incorrect answer
+// Check user's answer
+function checkAnswer(event) {
+    // If a button was clicked
+    if (event.target.matches("button")) {
+        // Determine which answer was clicked
+        var userAnswer = event.target.value;
+        console.log(userAnswer)
+
+        // If user answer matches answer key:
+        if (userAnswer === questionsArray[currentQuestion].correct) {
+            // Give feedback saying "Correct!"
+            showFeedback("Correct!");
+            // Proceed to next question
+            goToNextQuestion();
+        } else {
+            // Give feedback saying "Wrong!"
+            showFeedback("Wrong!");
+            // Process incorrect answer
+            processWrongAnswer();
+        }
+    }
+}
 
 // Give feedback
+function showFeedback(feedbackMessage) {
     // Set feedback text to message
+    feedbackDisplay.textContent = feedbackMessage;
     // Display feedback
-    // Hide feedback and reset text after 1 second
+    feedbackDisplay.className = "";
+    // Hide feedback and reset text after 1.5 seconds
+    setTimeout(function() {
+        feedbackDisplay.className="display-none";
+    }, 1500)
+}
 
 // Process incorrect answer
-    // If time left is more than 10:
-        // Subtract 10 from time left
-        // Increment question index
-        // Update question
-    // Otherwise:
+function processWrongAnswer() {
+    // Subtract 10 seconds
+    timeLeft -= 10;
+    // If time left is more than 0:
+    if (timeLeft > 0) {
+        // Update time display
+        timeDisplay.firstElementChild.textContent = timeLeft;
+        // Proceed to next question
+        goToNextQuestion();
+    } else {
         // Stop the interval
+        clearInterval(interval);
         // Set time left to zero
+        timeLeft = 0;
         // Display time left as zero
+        timeDisplay.firstElementChild.textContent = 0;
         // Show end screen
+        endGame();
+    }
+    
+}
 
 // Show end screen
 function endGame() {
@@ -184,6 +231,7 @@ function endGame() {
 startButton.addEventListener("click", startQuiz);
 
 // When answer is chosen, check user's answer
+answersDisplay.addEventListener("click", checkAnswer)
 
 // When user clicks submit, submit high score
 
