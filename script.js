@@ -71,16 +71,24 @@ function startQuiz() {
     // Change to question view
     changeView(questionView);
     // Start the countdown interval
+    timeDisplay.firstElementChild.textContent = timeLeft;
     interval = setInterval(countOneSec, 1000);
 }
 
 // Count down
 function countOneSec() {
     // Decrease time left by one
+    timeLeft--;
     // Update new time
-    // If time left is zero:
+    timeDisplay.firstElementChild.textContent = timeLeft;
+    // If time left is zero (or somehow less):
+    if (timeLeft <= 0) {
         // Stop the interval
+        clearInterval(interval);
         // Show end screen
+        timeLeft = 0;
+        endGame();
+    }
 }
 
 // Update question
@@ -127,8 +135,10 @@ function updateQuestion() {
         // Show end screen
 
 // Show end screen
+function endGame() {
     // Set final score text to time left
     // Change view to end screen
+}
 
 // Submit high score
     // Create object for this score
