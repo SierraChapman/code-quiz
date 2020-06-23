@@ -9,6 +9,8 @@ var questionView = document.getElementById("question-view");
 var questionDisplay = document.getElementById("question");
 var answersDisplay = document.getElementById("answers");
 var feedbackDisplay = document.getElementById("feedback");
+var finalScoreDisplay = document.getElementById("final-score");
+var endView = document.getElementById("end-screen")
 // pointer to current view
 var currentView = startView;
 // quiz questions
@@ -84,10 +86,7 @@ function countOneSec() {
     timeDisplay.firstElementChild.textContent = timeLeft;
     // If time left is zero (or somehow less):
     if (timeLeft <= 0) {
-        // Stop the interval
-        clearInterval(interval);
-        // Show end screen
-        timeLeft = 0;
+        // End the game
         endGame();
     }
 }
@@ -115,7 +114,7 @@ function goToNextQuestion() {
     currentQuestion++;
     // If currentQuestion is greater than or equal to the number of questions:
     if (currentQuestion >= questionsArray.length) {
-        // Proceed to end screen
+        // End the game
         endGame();
     } else {
         // Update question
@@ -169,22 +168,25 @@ function processWrongAnswer() {
         // Proceed to next question
         goToNextQuestion();
     } else {
-        // Stop the interval
-        clearInterval(interval);
-        // Set time left to zero
-        timeLeft = 0;
-        // Display time left as zero
-        timeDisplay.firstElementChild.textContent = 0;
-        // Show end screen
+        // End the game
         endGame();
     }
     
 }
 
-// Show end screen
+// End the game and show end screen
 function endGame() {
+    // Stop the interval
+    clearInterval(interval);
+    // Make sure time left is not negative
+    if (timeLeft < 0) {
+        timeLeft = 0;
+        timeDisplay.firstElementChild.textContent = 0;
+    }
     // Set final score text to time left
+    finalScoreDisplay.textContent = timeLeft;
     // Change view to end screen
+    changeView(endView)
 }
 
 // Submit high score
