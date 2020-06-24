@@ -1,7 +1,6 @@
 // CREATE GLOBAL VARIABLES
 
 // pointers to DOM elements
-var highScoresLink = document.getElementById("high-scores-link");
 var timeDisplay = document.getElementById("time");
 var startView = document.getElementById("start-screen");
 var startButton = document.getElementById("start-button");
@@ -16,6 +15,8 @@ var initialsInput = document.getElementById("initials-input");
 var header = document.querySelector("header");
 var highScoresView = document.getElementById("high-scores-view");
 var highScoresList = document.getElementById("high-scores-list");
+var highScoresLink = document.getElementById("high-scores-link");
+var goBackButton = document.getElementById("go-back-button");
 // pointer to current view
 var currentView = startView;
 // quiz questions
@@ -224,6 +225,7 @@ function submitScore(event) {
     var rank = determineRank(newScore);
     // Splice into proper place
     highScoresArray.splice(rank, 0, newScore);
+    // POSSIBLY ADD: LIMIT HIGH SCORES SIZE?
     // Save new high scores to localStorage
     localStorage.setItem("highScores", JSON.stringify(highScoresArray));
 
@@ -253,7 +255,8 @@ function determineRank(scoreObject) {
 function goToHighScores() {
     // Render high score list
     renderHighScores();
-    // Hide current view
+    // Hide current view (plus any feedback displayed)
+    feedbackDisplay.className = "display-none";
     currentView.className = "display-none";
     // Make header invisible
     header.className = "invisible";
@@ -278,9 +281,14 @@ function renderHighScores() {
 }
 
 // Go back from high scores
+function exitHighScores() {
     // Hide high score view
+    highScoresView.className = "display-none";
     // Make header visible
+    header.className = "";
     // Display current view
+    currentView.className = "";
+}
 
 // Clear high scores
     // Delete high scores from localStorage
@@ -293,14 +301,15 @@ function renderHighScores() {
 startButton.addEventListener("click", startQuiz);
 
 // When answer is chosen, check user's answer
-answersDisplay.addEventListener("click", checkAnswer)
+answersDisplay.addEventListener("click", checkAnswer);
 
 // When user clicks submit, submit score to high scores
-submitButton.addEventListener("click", submitScore)
+submitButton.addEventListener("click", submitScore);
 
 // When user clicks view high scores, show high scores
-highScoresLink.addEventListener("click", goToHighScores)
+highScoresLink.addEventListener("click", goToHighScores);
 
 // When user clicks to back, go back from high scores
+goBackButton.addEventListener("click", exitHighScores);
 
 // WHen user clicks clear high scores, clear high scores
