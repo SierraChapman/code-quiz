@@ -18,8 +18,6 @@ var highScoresList = document.getElementById("high-scores-list");
 var highScoresLink = document.getElementById("high-scores-link");
 var goBackButton = document.getElementById("go-back-button");
 var clearHighScoresButton = document.getElementById("clear-high-scores");
-// pointer to current view
-var currentView = startView;
 // quiz questions
 var questionsArray = [
     {
@@ -48,6 +46,8 @@ var questionsArray = [
         correct: "3"
     },
 ];
+// pointer to current view
+var currentView;
 // current question index
 var currentQuestion;
 // time left
@@ -62,6 +62,7 @@ var highScoresArray = JSON.parse(localStorage.getItem("highScores"));
 if (highScoresArray === null) {
     highScoresArray = [];
 }
+
 // DEFINE FUNCTIONS
 
 // Change view - for all but high scores!
@@ -74,14 +75,21 @@ function changeView(newView) {
     newView.className = "";
 }
 
-// TO ADD: PREPARE THE QUIZ
+// Prepare the quiz
+function prepareQuiz() {
+    // Set current view pointer to start view
+    currentView = startView;
+    // Set time left to 75
+    timeLeft = 75;
+    // Set time displayed to zero
+    timeDisplay.firstElementChild.textContent = 0;
+    // Set current question index
+    currentQuestion = 0;
+}
+
 
 // Start the quiz
 function startQuiz() {
-    // Set time left
-    timeLeft = 75;
-    // Set current question index
-    currentQuestion = 0;
     // Update question
     updateQuestion();
     // Change to question view
@@ -233,6 +241,9 @@ function submitScore(event) {
     // Go to high scores page
     goToHighScores();
 
+    // Prepare to run quiz again
+    prepareQuiz()
+
     // Clear input field
     initialsInput.value = "";
 }
@@ -302,6 +313,14 @@ function clearHighScores() {
 }
 
 // CREATE EVENT LISTENERS
+
+// When page loads, prepare quiz and display start page
+window.onload = function() {
+    console.log("page has loaded");
+    prepareQuiz();
+    currentView.className = "";
+    header.className = "";
+}
 
 // When start button is clicked, start the quiz
 startButton.addEventListener("click", startQuiz);
