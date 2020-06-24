@@ -15,6 +15,7 @@ var submitButton = document.getElementById("submit-button");
 var initialsInput = document.getElementById("initials-input");
 var header = document.querySelector("header");
 var highScoresView = document.getElementById("high-scores-view");
+var highScoresList = document.getElementById("high-scores-list");
 // pointer to current view
 var currentView = startView;
 // quiz questions
@@ -262,10 +263,18 @@ function goToHighScores() {
 
 // Render high score list
 function renderHighScores() {
+    // Clear high scores
+    highScoresList.innerHTML = "";
+    
     // For each item in the high scores array:
+    for (var i = 0; i < highScoresArray.length; i++) {
         // Create li
+        var singleScore = document.createElement("li");
         // Set textContent to show initials and score
+        singleScore.textContent = highScoresArray[i].initials + " – " + highScoresArray[i].score;
         // Add li to the high scores list
+        highScoresList.appendChild(singleScore);
+    }
 }
 
 // Go back from high scores
@@ -290,6 +299,7 @@ answersDisplay.addEventListener("click", checkAnswer)
 submitButton.addEventListener("click", submitScore)
 
 // When user clicks view high scores, show high scores
+highScoresLink.addEventListener("click", goToHighScores)
 
 // When user clicks to back, go back from high scores
 
