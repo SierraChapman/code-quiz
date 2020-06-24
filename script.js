@@ -13,6 +13,8 @@ var finalScoreDisplay = document.getElementById("final-score");
 var endView = document.getElementById("end-screen");
 var submitButton = document.getElementById("submit-button");
 var initialsInput = document.getElementById("initials-input");
+var header = document.querySelector("header");
+var highScoresView = document.getElementById("high-scores-view");
 // pointer to current view
 var currentView = startView;
 // quiz questions
@@ -216,8 +218,6 @@ function submitScore(event) {
         initials: initialsInput.value,
         score: timeLeft
     }
-    // Clear input field
-    initialsInput.value = "";
 
     // Determine rank
     var rank = determineRank(newScore);
@@ -225,6 +225,12 @@ function submitScore(event) {
     highScoresArray.splice(rank, 0, newScore);
     // Save new high scores to localStorage
     localStorage.setItem("highScores", JSON.stringify(highScoresArray));
+
+    // Go to high scores page
+    goToHighScores();
+
+    // Clear input field
+    initialsInput.value = "";
 }
 
 // Determine rank
@@ -243,16 +249,24 @@ function determineRank(scoreObject) {
 }
 
 // Show high scores
+function goToHighScores() {
     // Render high score list
+    renderHighScores();
     // Hide current view
+    currentView.className = "display-none";
     // Make header invisible
+    header.className = "invisible";
     // Display high score view
+    highScoresView.className = "";
+}
 
 // Render high score list
+function renderHighScores() {
     // For each item in the high scores array:
         // Create li
         // Set textContent to show initials and score
         // Add li to the high scores list
+}
 
 // Go back from high scores
     // Hide high score view
