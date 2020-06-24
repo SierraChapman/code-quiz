@@ -10,6 +10,7 @@ var answersDisplay = document.getElementById("answers");
 var feedbackDisplay = document.getElementById("feedback");
 var finalScoreDisplay = document.getElementById("final-score");
 var endView = document.getElementById("end-screen");
+var endHeading = document.getElementById("end-screen-heading");
 var submitButton = document.getElementById("submit-button");
 var initialsInput = document.getElementById("initials-input");
 var header = document.querySelector("header");
@@ -108,7 +109,7 @@ function countOneSec() {
     // If time left is zero (or somehow less):
     if (timeLeft <= 0) {
         // End the game
-        endGame();
+        endGame("You ran out of time.");
         // Exit high scores view (does nothing if not viewing high scores)
         exitHighScores();
     }
@@ -138,7 +139,7 @@ function goToNextQuestion() {
     // If currentQuestion is greater than or equal to the number of questions:
     if (currentQuestion >= questionsArray.length) {
         // End the game
-        endGame();
+        endGame("All done!");
     } else {
         // Update question
         updateQuestion();
@@ -193,16 +194,18 @@ function processWrongAnswer() {
         // Proceed to next question
         goToNextQuestion();
     } else {
-        // End the game
-        endGame();
+        // End the game, saying "All done!" if that was the last question
+        if (currentQuestion === questionsArray.length - 1) {
+            endGame("All done!");
+        } else {
+            endGame("You ran out of time.");
+        }
     }
     
 }
 
-// TO ADD: SHOW DIFFERENT END SCREEN IF DIDN'T FINISH
-
 // End the game and show end screen
-function endGame() {
+function endGame(endMessage) {
     // Stop the interval
     clearInterval(timerInterval);
     // Make sure time left is not negative
@@ -212,6 +215,8 @@ function endGame() {
     }
     // Set final score text to time left
     finalScoreDisplay.textContent = timeLeft;
+    // Set end screen message
+    endHeading.textContent = endMessage;
     // Change view to end screen
     changeView(endView)
 }
