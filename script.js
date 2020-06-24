@@ -241,7 +241,8 @@ function submitScore(event) {
     var rank = determineRank(newScore);
     // Splice into proper place
     highScoresArray.splice(rank, 0, newScore);
-    // POSSIBLY ADD: LIMIT HIGH SCORES SIZE?
+    // Only keep top 10 scores
+    highScoresArray = highScoresArray.slice(0, 10);
     // Save new high scores to localStorage
     localStorage.setItem("highScores", JSON.stringify(highScoresArray));
 
