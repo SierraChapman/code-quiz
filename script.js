@@ -17,6 +17,7 @@ var highScoresView = document.getElementById("high-scores-view");
 var highScoresList = document.getElementById("high-scores-list");
 var highScoresLink = document.getElementById("high-scores-link");
 var goBackButton = document.getElementById("go-back-button");
+var clearHighScoresButton = document.getElementById("clear-high-scores");
 // pointer to current view
 var currentView = startView;
 // quiz questions
@@ -291,9 +292,14 @@ function exitHighScores() {
 }
 
 // Clear high scores
+function clearHighScores() {
     // Delete high scores from localStorage
+    localStorage.removeItem("highScores");
     // Set high scores array to empty list
+    highScoresArray = [];
     // Delete HTML contents of high scores list
+    highScoresList.innerHTML = "";
+}
 
 // CREATE EVENT LISTENERS
 
@@ -312,4 +318,5 @@ highScoresLink.addEventListener("click", goToHighScores);
 // When user clicks to back, go back from high scores
 goBackButton.addEventListener("click", exitHighScores);
 
-// WHen user clicks clear high scores, clear high scores
+// When user clicks clear high scores, clear high scores
+clearHighScoresButton.addEventListener("click", clearHighScores);
