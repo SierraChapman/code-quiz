@@ -109,6 +109,8 @@ function countOneSec() {
     if (timeLeft <= 0) {
         // End the game
         endGame();
+        // Exit high scores view (does nothing if not viewing high scores)
+        exitHighScores();
     }
 }
 
@@ -149,7 +151,7 @@ function checkAnswer(event) {
     if (event.target.matches("button")) {
         // Determine which answer was clicked
         var userAnswer = event.target.value;
-        console.log(userAnswer)
+        // console.log(userAnswer)
 
         // If user answer matches answer key:
         if (userAnswer === questionsArray[currentQuestion].correct) {
@@ -316,7 +318,7 @@ function clearHighScores() {
 
 // When page loads, prepare quiz and display start page
 window.onload = function() {
-    console.log("page has loaded");
+    // console.log("page has loaded");
     prepareQuiz();
     currentView.className = "";
     header.className = "";
