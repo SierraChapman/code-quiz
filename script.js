@@ -10,7 +10,9 @@ var questionDisplay = document.getElementById("question");
 var answersDisplay = document.getElementById("answers");
 var feedbackDisplay = document.getElementById("feedback");
 var finalScoreDisplay = document.getElementById("final-score");
-var endView = document.getElementById("end-screen")
+var endView = document.getElementById("end-screen");
+var submitButton = document.getElementById("submit-button");
+var initialsInput = document.getElementById("initials-input");
 // pointer to current view
 var currentView = startView;
 // quiz questions
@@ -50,9 +52,11 @@ var timerInterval;
 // pointer to timeout for displaying feedback
 var feedbackTimeout;
 // high scores object - retrieve from localStorage
-
+var highScoresArray = JSON.parse(localStorage.getItem("highScores"));
 // if high scores object is null, set to empty list
-
+if (highScoresArray === null) {
+    highScoresArray = [];
+}
 // DEFINE FUNCTIONS
 
 // Change view - for all but high scores!
@@ -64,6 +68,8 @@ function changeView(newView) {
     // Display new view
     newView.className = "";
 }
+
+// TO ADD: PREPARE THE QUIZ
 
 // Start the quiz
 function startQuiz() {
@@ -178,6 +184,8 @@ function processWrongAnswer() {
     
 }
 
+// TO ADD: SHOW DIFFERENT END SCREEN IF DIDN'T FINISH
+
 // End the game and show end screen
 function endGame() {
     // Stop the interval
@@ -194,20 +202,45 @@ function endGame() {
 }
 
 // Submit high score
+function submitScore(event) {
+    event.preventDefault();
+
+    // Check that initials were entered
+    if (initialsInput.value === "") {
+        alert("Enter your initials.");
+        return;
+    }
+
     // Create object for this score
-    // If no initials given, use "unknown"
+    var newScore = {
+        initials: initialsInput.value,
+        score: timeLeft
+    }
+    // Clear input field
+    initialsInput.value = "";
 
     // Determine rank
+    var rank = determineRank(newScore);
     // Splice into proper place
+    highScoresArray.splice(rank, 0, newScore);
     // Save new high scores to localStorage
+    localStorage.setItem("highScores", JSON.stringify(highScoresArray));
+}
 
 // Determine rank
+function determineRank(scoreObject) {
+    var i;
     // For each item in the high scores array:
+    for (i = 0; i < highScoresArray.length; i++) {
         // If user high score is greater or equal
+        if (scoreObject.score >= highScoresArray[i].score) {
             // Current index is index for insertion
-    // If insertion index is null:
-        // Set equal to length of array
-    // return rank
+            break;
+        }
+    }
+    // If new score is the lowest score, i will be highScoresArray.length
+    return i;
+}
 
 // Show high scores
     // Render high score list
@@ -239,7 +272,8 @@ startButton.addEventListener("click", startQuiz);
 // When answer is chosen, check user's answer
 answersDisplay.addEventListener("click", checkAnswer)
 
-// When user clicks submit, submit high score
+// When user clicks submit, submit score to high scores
+submitButton.addEventListener("click", submitScore)
 
 // When user clicks view high scores, show high scores
 
